@@ -1,15 +1,16 @@
-// import { Provider } from 'react-redux'
-// import UserContainer from './components/UserContainer'
-// import store from './components/redux/store';
+import { Provider } from "react-redux";
+import Movies from "./components/Movies";
+import Navbar from "./components/NavBar";
+import store from "./components/redux/store";
 
 function App() {
   return (
-    // <Provider store={store}>
-    <div className="App">
-      <p>Hello React</p>
-    {/* <UserContainer /> */}
-    </div>
-    // </Provider>
+    <Provider store={store}>
+      <div className="App">
+        <Navbar />
+        <Movies />
+      </div>
+    </Provider>
   );
 }
 
