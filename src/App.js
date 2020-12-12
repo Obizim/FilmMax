@@ -1,16 +1,25 @@
 import { Provider } from "react-redux";
-import Movies from "./components/Movies";
+import Allmovies from "./components/AllMovies";
 import Navbar from "./components/NavBar";
 import store from "./components/redux/store";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Alltvshows from "./components/AllTvShows";
+import Moviedetail from "./components/moviesData/MovieDetail";
 
 function App() {
   return (
-    <Provider store={store}>
-      <div className="App">
-        <Navbar />
-        <Movies />
-      </div>
-    </Provider>
+    <Router>
+      <Navbar />
+      <Switch>
+        <Provider store={store}>
+          <div className="App">
+            <Route exact path="/" component={Allmovies}></Route>
+            <Route exact path="/tvshows" component={Alltvshows}></Route>
+            <Route exact path="/:id" component={Moviedetail}></Route>
+          </div>
+        </Provider>
+      </Switch>
+    </Router>
   );
 }
 

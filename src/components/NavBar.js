@@ -1,55 +1,52 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom'
 
 function Navbar() {
   const [isOpen, setOpen] = useState(true);
 
   return (
-    <div>
-      <nav class="fixed w-full items-center justify-between bg-gray-900 text-gray-100 py-6 px-14 shadow-md">
-        <div class="flex justify-between items-center">
-          <img src="" alt="Logo" class="h-auto w-24" />
+    <div className="sticky w-full">
+      <nav className="items-center justify-between bg-gray-900 text-gray-100 py-8 px-6 lg:px-14 shadow-lg font-quicksand">
+        <div className="flex justify-between items-center">
+           <h1 className="text-xl text-red-600">FILMMAX</h1>
           <button
             onClick={() => setOpen(!isOpen)}
-            class="lg:hidden md:hidden"
+            className="lg:hidden md:hidden focus:outline-none focus:ring focus:border-white"
             aria-label="Open Menu"
           >
             <svg
               fill="none"
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               viewBox="0 0 24 24"
-              class="w-8 h-8"
+              className="w-8 h-8"
             >
               <path d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
           </button>
-          <div class="hidden md:flex lg:flex items-center">
-            <ul class="md:flex space-x-8 text-xl">
-              <li className="cursor-pointer">Movies</li>
-              <li className="cursor-pointer">TV shows</li>
+          <div className="hidden md:flex lg:flex items-center">
+            <ul className="md:flex space-x-8 text-xl">
+              <Link to="/"><li className="cursor-pointer">Movies</li></Link>
+              <Link to="/tvshows"><li className="cursor-pointer">TV shows</li></Link>
               <li className="cursor-pointer">Actors</li>
             </ul>
           </div>
         </div>
         {!isOpen && (
-          <aside class="md:hidden lg:hidden transform top-0 left-0 w-52 bg-gray-900 fixed h-full overflow-auto ease-in-out transition-all duration-900 z-30">
-            <span class="flex w-full items-center py-7 border-b">
-              <img
-                src="/logos/fox-hub.png"
-                alt="Logo"
-                class="h-auto w-32 mx-auto"
-              />
+          <aside className="md:hidden lg:hidden top-0 left-0 w-52 bg-gray-900 fixed h-full overflow-auto ease-in-out transition-all duration-900 z-10">
+            <span className="flex w-full items-center py-7 border-b">
+            <h1 className="text-xl text-red-600 px-6">FILMMAX</h1>
             </span>
-            <span class="flex items-center py-4 px-6 cursor-pointer border-b">
-              <span>Movies</span>
+            <span className="flex items-center py-4 px-6 cursor-pointer border-b">
+            <Link to="/"><span className="cursor-pointer">Movies</span></Link>
             </span>
 
-            <span class="flex items-center py-4 px-6 cursor-pointer border-b">
-              <span>TV shows</span>
+            <span className="flex items-center py-4 px-6 cursor-pointer border-b">
+            <Link to="/tvshows"><span className="cursor-pointer">TV shows</span></Link>
             </span>
-            <span class="flex items-center py-4 px-6 cursor-pointer border-b">
+            <span className="flex items-center py-4 px-6 cursor-pointer border-b">
               <span>Actors</span>
             </span>
           </aside>
