@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchMovies } from "../redux/movies/actions/MovieAction";
+import { fetchTopRated } from "../redux/movies/actions//TopRatedAction";
 import { url } from "../redux/movies/MovieTypes";
 import { Link } from "react-router-dom";
 
-function PopularMovies({ movieList, loading, error, fetchMovies }) {
+function TopRated({ movieList, loading, error, fetchTopRated }) {
   useEffect(() => {
-    fetchMovies();
-  }, [fetchMovies]);
+    fetchTopRated();
+  }, [fetchTopRated]);
 
   return loading ? (
     <h2>Loading...</h2>
@@ -18,7 +18,7 @@ function PopularMovies({ movieList, loading, error, fetchMovies }) {
   ) : (
     <div className="lg:py-14">
       <h2 className="lg:text-4xl text-2xl py-8 px-4 lg:px-28 text-red-600 font-quicksand">
-        Popular Movies
+        Top Rated Movies
       </h2>
       <div className="grid grid-cols-2 lg:grid-cols-6 md:grid-cols-4 gap-3 md:gap-4 lg:gap-6 lg:py-4 lg:px-28 md:p-18 p-4">
         {movieList &&
@@ -43,16 +43,16 @@ function PopularMovies({ movieList, loading, error, fetchMovies }) {
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.popularMovies.loading,
-    error: state.popularMovies.error,
-    movieList: state.popularMovies.movies,
+    loading: state.topRated.loading,
+    error: state.topRated.error,
+    movieList: state.topRated.movies,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchMovies: () => dispatch(fetchMovies()),
+    fetchTopRated: () => dispatch(fetchTopRated()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PopularMovies);
+export default connect(mapStateToProps, mapDispatchToProps)(TopRated);
