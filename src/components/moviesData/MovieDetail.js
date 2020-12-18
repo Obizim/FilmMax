@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { url } from "../redux/movies/MovieTypes";
+import Loading from "../Loading";
 import axios from "axios";
 
 function Moviedetail() {
   const [movie, setMovie] = useState([]);
   const [castCrew, setCastCrew] = useState([]);
+  const [trailer, setTrailer] = useState([]);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
@@ -37,10 +39,22 @@ function Moviedetail() {
     loadCastCrew();
   }, [id]);
 
+  useEffect(() => {
+    const loadTrailer = async () => {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/${id}/videos?api_key=0451e553a464ab7929fee2e705dab05e`
+      );
+      const trailer = response.data.results;
+      setTrailer(trailer);
+      console.log(trailer);
+    };
+    loadTrailer();
+  }, [id]);
+
   return (
-    <div className="h-screen bg-gray-900 text-gray-100 font-quicksand">
+    <div className="bg-gray-900 text-gray-100 font-quicksand">
       {loading ? (
-        <h1>Loading</h1>
+        <Loading />
       ) : (
         <div className="lg:px-20 lg:py-10 md:py-10 bg-gray-900">
           <div
@@ -60,7 +74,7 @@ function Moviedetail() {
                 {movie.title}
               </h2>
               <p className="">Release Date: {movie.release_date}</p>
-              <div className="flex flex-row">
+              <div className="flex flex-row flex-wrap">
                 Genres:&nbsp;
                 {movie.genres.map((genre, index) => (
                   <p className="text-red-600">
@@ -81,16 +95,51 @@ function Moviedetail() {
             </div>
           </div>
           <div className="lg:py-14 bg-gray-900 w-full">
-            <h2 className="lg:text-4xl text-2xl px-4 py-8 text-red-600">Cast</h2>
+            <h2 className="lg:text-4xl text-2xl px-4 py-8 text-red-600">
+              Cast
+            </h2>
             <div className="grid grid-cols-2 lg:grid-cols-6 md:grid-cols-4 gap-3 md:gap-4 lg:gap-6 lg:py-4 md:p-18 p-4">
-              {castCrew.map((cast) => (
-                <div>
-                  <img className="rounded" src={url + cast.profile_path} alt={cast.name} />
-                  <h2>{cast.name}</h2>
-                  <p className="text-red-600 mt-2">{cast.character}</p>
-                </div>
-              ))}
+              {castCrew
+                .filter((cast) => {
+                  if (cast.profile_path === null) {
+                    return false;
+                  }
+                  return true;
+                })
+                .map((cast) => (
+                  <div key={cast.id}>
+                    <img
+                      className="rounded"
+                      src={url + cast.profile_path}
+                      alt={cast.name}
+                    />
+                    <h2>{cast.name}</h2>
+                    <p className="text-red-600 mt-2">{cast.character}</p>
+                  </div>
+                ))}
+
+              {/* } */}
             </div>
+          </div>
+
+          <div className="p-4">
+            {trailer.map((trailer) => {
+              const youtubeUrl = `https://youtube.com/embed/${trailer.key}`;
+              return (
+                <div className="flex lg:flex-row lg:items-center justify-center space-x-4">
+                  <iframe
+                    key={id}
+                    src={youtubeUrl}
+                    title={trailer.name}
+                    width="560"
+                    height="315"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

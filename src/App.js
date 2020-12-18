@@ -5,6 +5,7 @@ import store from "./components/redux/store";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Alltvshows from "./components/AllTvShows";
 import Moviedetail from "./components/moviesData/MovieDetail";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
           </div>
         </Provider>
       </Switch>
+      <Footer />
     </Router>
+    
   );
 }
 

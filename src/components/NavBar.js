@@ -40,11 +40,11 @@ function Navbar() {
             <h1 className="text-xl text-red-600 px-6">FILMMAX</h1>
             </span>
             <span className="flex items-center py-4 px-6 cursor-pointer border-b">
-            <Link to="/"><span className="cursor-pointer">Movies</span></Link>
+            <Link to="/"><span className="cursor-pointer" onClick={() => setOpen(!isOpen)}>Movies</span></Link>
             </span>
 
             <span className="flex items-center py-4 px-6 cursor-pointer border-b">
-            <Link to="/tvshows"><span className="cursor-pointer">TV shows</span></Link>
+            <Link to="/tvshows"><span className="cursor-pointer" onClick={() => setOpen(!isOpen)}>TV shows</span></Link>
             </span>
             <span className="flex items-center py-4 px-6 cursor-pointer border-b">
               <span>Actors</span>
