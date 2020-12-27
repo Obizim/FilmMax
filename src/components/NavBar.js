@@ -30,7 +30,7 @@ function Navbar() {
             <ul className="md:flex space-x-8 text-xl">
               <Link to="/"><li className="cursor-pointer">Movies</li></Link>
               <Link to="/tvshows"><li className="cursor-pointer">TV shows</li></Link>
-              <li className="cursor-pointer">Actors</li>
+              <Link to="/actors"><li className="cursor-pointer">Actors</li></Link>
             </ul>
           </div>
         </div>
@@ -47,7 +47,7 @@ function Navbar() {
             <Link to="/tvshows"><span className="cursor-pointer" onClick={() => setOpen(!isOpen)}>TV shows</span></Link>
             </span>
             <span className="flex items-center py-4 px-6 cursor-pointer border-b">
-              <span>Actors</span>
+            <Link to="/actors"><span>Actors</span></Link>
             </span>
           </aside>
         )}

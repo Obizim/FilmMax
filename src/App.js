@@ -6,23 +6,23 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Alltvshows from "./components/AllTvShows";
 import Moviedetail from "./components/moviesData/MovieDetail";
 import Footer from "./components/Footer";
+import Actors from "./Actors";
 
 function App() {
   return (
+    <Provider store={store}>
     <Router>
       <Navbar />
       <Switch>
-        <Provider store={store}>
-          <div className="App">
-            <Route exact path="/" component={Allmovies}></Route>
-            <Route exact path="/tvshows" component={Alltvshows}></Route>
-            <Route exact path="/:id" component={Moviedetail}></Route>
-          </div>
-        </Provider>
+        
+          <Route exact path="/" component={Allmovies}></Route>
+          <Route path="/tvshows" component={Alltvshows}></Route>
+          <Route path="/actors" component={Actors}></Route>
+          <Route path="/:id" component={Moviedetail}></Route>
       </Switch>
       <Footer />
     </Router>
-    
+    </Provider>
   );
 }
 

@@ -35,6 +35,7 @@ function Moviedetail() {
       );
       const castCrew = response.data.cast;
       setCastCrew(castCrew);
+      setLoading(false);
     };
     loadCastCrew();
   }, [id]);
@@ -46,17 +47,17 @@ function Moviedetail() {
       );
       const trailer = response.data.results;
       setTrailer(trailer);
-      console.log(trailer);
+      setLoading(false);
     };
     loadTrailer();
   }, [id]);
 
   return (
-    <div className="bg-gray-900 text-gray-100 font-quicksand">
+    <div>
       {loading ? (
-        <Loading />
+       <h2>Loading...</h2>
       ) : (
-        <div className="lg:px-20 lg:py-10 md:py-10 bg-gray-900">
+        <div className="lg:px-20 lg:py-10 md:py-10 bg-gray-900 text-gray-100 font-quicksand">
           <div
             key={id}
             className="lg:container md:container lg:px-14 md:mx-auto lg:mx-auto flex items-center flex-wrap bg-gray-900"
