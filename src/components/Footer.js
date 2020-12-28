@@ -10,11 +10,11 @@ function Footer() {
              <p>&copy; all rights reserved</p>
              </div>
             <div className="space-x-4 lg:text-2xl text-xl">
-            <a href="https://twitter.com/Obizim_" target="_blank" rel="noreferrer"><i className="fab fa-twitter" aria-hidden="true"></i>
+            <a href="https://twitter.com/Obizim_" target="_blank" rel="noreferrer"><i className="fab fa-twitter transition hover:text-blue-400" aria-hidden="true"></i>
             </a>
             <a href="https://github.com/Obizim" target="_blank" rel="noreferrer"><i className="fab fa-github" aria-hidden="true"></i>
             </a>
-            <a href="https://www.linkedin.com/in/zimuzo-obi-0984841b5/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin-in"></i></a>
+            <a href="https://www.linkedin.com/in/zimuzo-obi-0984841b5/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin-in hover:text-blue-500"></i></a>
             </div>
         </div>
     )

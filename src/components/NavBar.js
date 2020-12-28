@@ -28,9 +28,8 @@ function Navbar() {
           </button>
           <div className="hidden md:flex lg:flex items-center">
             <ul className="md:flex space-x-8 text-xl">
-              <Link to="/"><li className="cursor-pointer">Movies</li></Link>
-              <Link to="/tvshows"><li className="cursor-pointer">TV shows</li></Link>
-              <Link to="/actors"><li className="cursor-pointer">Actors</li></Link>
+              <Link to="/"><li className="cursor-pointer transition hover:text-red-600">Movies</li></Link>
+              <Link to="/tvshows"><li className="cursor-pointer transition hover:text-red-600">TV shows</li></Link>
             </ul>
           </div>
         </div>
@@ -45,9 +44,6 @@ function Navbar() {
 
             <span className="flex items-center py-4 px-6 cursor-pointer border-b">
             <Link to="/tvshows"><span className="cursor-pointer" onClick={() => setOpen(!isOpen)}>TV shows</span></Link>
-            </span>
-            <span className="flex items-center py-4 px-6 cursor-pointer border-b">
-            <Link to="/actors"><span>Actors</span></Link>
             </span>
           </aside>
         )}
