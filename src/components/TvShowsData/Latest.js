@@ -31,7 +31,7 @@ function Latest({ tvList, loading, error,  fetchLatestTvShow }) {
               <div key={id} className="font-quicksand">
                 <img src={url + poster_path} alt={name} />
                 <p className="text-xl mt-2 rounded">
-                  <Link to={`/${id}`}>{name}</Link>
+                  <Link to={`/tvshow/${id}`}>{name}</Link>
                 </p>
               </div>
             );

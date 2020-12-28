@@ -3,7 +3,7 @@ import "../index.css";
 
 function Loading() {
   return (
-    <div className="lds-roller container h-screen flex items-center justify-center">
+    <div className="lds-roller container h-screen bg-gray-900 flex items-center justify-center">
       <div></div>
       <div></div>
       <div></div>
