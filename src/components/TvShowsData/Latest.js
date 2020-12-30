@@ -12,7 +12,7 @@ function Latest({ tvList, loading, error,  fetchLatestTvShow }) {
   return loading ? (
     <h2>Loading...</h2>
   ) : error ? (
-    <h2 className="h-screen text-center text-2xl py-44 px-8">
+    <h2 className="h-screen text-center lg:text-xl text-base py-44 px-8">
       {error}. Check your Internet Connection
     </h2>
   ) : (
@@ -30,7 +30,7 @@ function Latest({ tvList, loading, error,  fetchLatestTvShow }) {
             return (
               <div key={id} className="font-quicksand">
                 <img src={url + poster_path} alt={name} />
-                <p className="text-xl mt-2 rounded">
+                <p className="lg:text-xl text-base mt-2 rounded">
                   <Link to={`/tvshow/${id}`}>{name}</Link>
                 </p>
               </div>

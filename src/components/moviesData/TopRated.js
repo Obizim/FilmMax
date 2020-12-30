@@ -12,7 +12,7 @@ function TopRated({ movieList, loading, error, fetchTopRated }) {
   return loading ? (
     <h2>Loading...</h2>
   ) : error ? (
-    <h2 className="h-screen text-center text-2xl py-44 px-8">
+    <h2 className="h-screen text-center lg:text-xl text-base py-44 px-8">
       {error}. Check your Internet Connection
     </h2>
   ) : (
@@ -30,7 +30,7 @@ function TopRated({ movieList, loading, error, fetchTopRated }) {
             return (
               <div key={id} className="font-quicksand">
                 <img src={url + poster_path} alt={title} />
-                <p className="text-xl mt-2 rounded">
+                <p className="lg:text-xl text-base mt-2 rounded">
                   <Link to={`/${id}`}>{title}</Link>
                 </p>
               </div>

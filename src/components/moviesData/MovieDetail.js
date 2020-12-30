@@ -17,8 +17,18 @@ function Moviedetail() {
         const response = await axios.get(
           `https://api.themoviedb.org/3/movie/${id}?api_key=0451e553a464ab7929fee2e705dab05e`
         );
+        const res = await axios.get(
+          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=0451e553a464ab7929fee2e705dab05e`
+        );
+        const resp = await axios.get(
+          `https://api.themoviedb.org/3/movie/${id}/videos?api_key=0451e553a464ab7929fee2e705dab05e`
+        );
         const movie = response.data;
+        const castCrew = res.data.cast;
+        const trailer = resp.data.results;
         setMovie(movie);
+        setCastCrew(castCrew);
+        setTrailer(trailer);
         setLoading(false);
       } catch (err) {
         setLoading(true);
@@ -28,34 +38,10 @@ function Moviedetail() {
     loadMovie();
   }, [id]);
 
-  useEffect(() => {
-    const loadCastCrew = async () => {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=0451e553a464ab7929fee2e705dab05e`
-      );
-      const castCrew = response.data.cast;
-      setCastCrew(castCrew);
-      setLoading(false);
-    };
-    loadCastCrew();
-  }, [id]);
-
-  useEffect(() => {
-    const loadTrailer = async () => {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}/videos?api_key=0451e553a464ab7929fee2e705dab05e`
-      );
-      const trailer = response.data.results;
-      setTrailer(trailer);
-      setLoading(false);
-    };
-    loadTrailer();
-  }, [id]);
-
   return (
     <div>
       {loading ? (
-       <Loading />
+        <Loading />
       ) : (
         <div className="lg:px-20 lg:py-10 md:py-10 bg-gray-900 text-gray-100 font-quicksand">
           <div
@@ -78,18 +64,20 @@ function Moviedetail() {
               <div className="flex flex-row flex-wrap">
                 Genres:&nbsp;
                 {movie.genres
-                .filter((genre) => {
-                  if (genre.name === null) {
-                    return false;
-                  }
-                  return true;
-                })
-                .map((genre,index) => (
-                  <div key={genre.id}>
-                    <p className="text-red-600">{genre.name}{index < movie.genres.length - 1 ? ",\u00A0" : ""}
-                    </p>
-                  </div>
-                ))}
+                  .filter((genre) => {
+                    if (genre.name === null) {
+                      return false;
+                    }
+                    return true;
+                  })
+                  .map((genre, index) => (
+                    <div key={genre.id}>
+                      <p className="text-red-600">
+                        {genre.name}
+                        {index < movie.genres.length - 1 ? ",\u00A0" : ""}
+                      </p>
+                    </div>
+                  ))}
               </div>
               <p className="leading-snug">{movie.overview}</p>
               <p>
@@ -102,39 +90,41 @@ function Moviedetail() {
               </p>
             </div>
           </div>
-          <div className="lg:py-14 bg-gray-900 w-full">
-            <h2 className="lg:text-4xl text-2xl px-4 py-8 text-red-600">
-              Cast
-            </h2>
-            <div className="grid grid-cols-2 lg:grid-cols-6 md:grid-cols-4 gap-3 md:gap-4 lg:gap-6 lg:py-4 md:p-18 p-4">
-              {castCrew
-                .filter((cast) => {
-                  if (cast.profile_path === null) {
-                    return false;
-                  }
-                  return true;
-                })
-                .map((cast) => (
-                  <div key={cast.id}>
-                    <img
-                      className="rounded"
-                      src={url + cast.profile_path}
-                      alt={cast.name}
-                    />
-                    <h2>{cast.name}</h2>
-                    <p className="text-red-600 mt-2">{cast.character}</p>
-                  </div>
-                ))}
+
+          {castCrew.length > 0 && (
+            <div className="lg:py-14 bg-gray-900 w-full">
+              <h2 className="lg:text-4xl text-2xl px-4 py-8 text-red-600">
+                Cast
+              </h2>
+              <div className="grid grid-cols-2 lg:grid-cols-6 md:grid-cols-4 gap-3 md:gap-4 lg:gap-6 lg:py-4 md:p-18 p-4">
+                {castCrew
+                  .filter((cast) => {
+                    if (cast.profile_path === null) {
+                      return false;
+                    }
+                    return true;
+                  })
+                  .map((cast) => (
+                    <div key={cast.id}>
+                      <img
+                        className="rounded"
+                        src={url + cast.profile_path}
+                        alt={cast.name}
+                      />
+                      <h2>{cast.name}</h2>
+                      <p className="text-red-600 mt-2">{cast.character}</p>
+                    </div>
+                  ))}
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="p-4">
             {trailer.map((trailer) => {
               const youtubeUrl = `https://youtube.com/embed/${trailer.key}`;
               return (
-                <div className="flex lg:flex-row lg:items-center justify-center space-x-4">
+                <div key={trailer.key} className="flex lg:flex-row lg:items-center justify-center space-x-4">
                   <iframe
-                    key={id}
                     src={youtubeUrl}
                     title={trailer.name}
                     width="560"

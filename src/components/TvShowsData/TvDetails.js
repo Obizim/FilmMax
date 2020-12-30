@@ -17,8 +17,18 @@ function Tvdetails() {
         const response = await axios.get(
           `https://api.themoviedb.org/3/tv/${id}?api_key=0451e553a464ab7929fee2e705dab05e`
         );
+        const res = await axios.get(
+          `https://api.themoviedb.org/3/tv/${id}/credits?api_key=0451e553a464ab7929fee2e705dab05e`
+        );
+        const resp = await axios.get(
+          `https://api.themoviedb.org/3/tv/${id}/videos?api_key=0451e553a464ab7929fee2e705dab05e`
+        );
         const tv = response.data;
+        const castCrew = res.data.cast;
+        const trailer = resp.data.results;
         setTv(tv);
+        setCastCrew(castCrew);
+        setTrailer(trailer);
         setLoading(false);
       } catch (err) {
         setLoading(true);
@@ -26,30 +36,6 @@ function Tvdetails() {
     };
 
     loadTv();
-  }, [id]);
-
-  useEffect(() => {
-    const loadCastCrew = async () => {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/tv/${id}/credits?api_key=0451e553a464ab7929fee2e705dab05e`
-      );
-      const castCrew = response.data.cast;
-      setCastCrew(castCrew);
-      setLoading(false);
-    };
-    loadCastCrew();
-  }, [id]);
-
-  useEffect(() => {
-    const loadTrailer = async () => {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/tv/${id}/videos?api_key=0451e553a464ab7929fee2e705dab05e`
-      );
-      const trailer = response.data.results;
-      setTrailer(trailer);
-      setLoading(false);
-    };
-    loadTrailer();
   }, [id]);
 
   return (
@@ -111,39 +97,43 @@ function Tvdetails() {
             </div>
           </div>
 
-          <div className="lg:py-14 bg-gray-900 w-full">
-            <h2 className="lg:text-4xl text-2xl px-4 py-8 text-red-600">
-              Cast
-            </h2>
-            <div className="grid grid-cols-2 lg:grid-cols-6 md:grid-cols-4 gap-3 md:gap-4 lg:gap-6 lg:py-4 md:p-18 p-4">
-              {castCrew
-                .filter((cast) => {
-                  if (cast.profile_path === null) {
-                    return false;
-                  }
-                  return true;
-                })
-                .map((cast) => (
-                  <div key={cast.id}>
-                    <img
-                      className="rounded"
-                      src={url + cast.profile_path}
-                      alt={cast.name}
-                    />
-                    <h2>{cast.name}</h2>
-                    <p className="text-red-600 mt-2">{cast.character}</p>
-                  </div>
-                ))}
+          {castCrew.length > 0 && (
+            <div className="lg:py-14 bg-gray-900 w-full">
+              <h2 className="lg:text-4xl text-2xl px-4 py-8 text-red-600">
+                Cast
+              </h2>
+              <div className="grid grid-cols-2 lg:grid-cols-6 md:grid-cols-4 gap-3 md:gap-4 lg:gap-6 lg:py-4 md:p-18 p-4">
+                {castCrew
+                  .filter((cast) => {
+                    if (cast.profile_path === null) {
+                      return false;
+                    }
+                    return true;
+                  })
+                  .map((cast) => (
+                    <div key={cast.id}>
+                      <img
+                        className="rounded"
+                        src={url + cast.profile_path}
+                        alt={cast.name}
+                      />
+                      <h2>{cast.name}</h2>
+                      <p className="text-red-600 mt-2">{cast.character}</p>
+                    </div>
+                  ))}
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="p-4">
             {trailer.map((trailer) => {
               const youtubeUrl = `https://youtube.com/embed/${trailer.key}`;
               return (
-                <div className="flex lg:flex-row lg:items-center justify-center space-x-4">
+                <div
+                  key={trailer.key}
+                  className="flex lg:flex-row lg:items-center justify-center space-x-4"
+                >
                   <iframe
-                    key={id}
                     src={youtubeUrl}
                     title={trailer.name}
                     width="560"
