@@ -33,12 +33,12 @@ function Alltvshows() {
       <section className="flex flex-col justify-center items-center">
         <form
           onSubmit={onhandleSubmit}
-          className="flex items-start container lg:justify-end justify-center lg:px-32 px-4 lg:py-4 py-2"
+          className="flex items-start container lg:justify-end justify-center lg:px-32 px-10 lg:py-4 py-2"
         >
           <input
             type="text"
             placeholder="🔎 Search for tvshows"
-            className="pl-2 pr-32 py-4 rounded text-gray-100 bg-gray-900 shadow-lg focus:outline-gray-800 focus:ring-4"
+            className="pl-2 pr-32 py-4 rounded text-gray-100 bg-gray-900 shadow-lg outline-none"
             onChange={onhandleSearch}
             value={searchTerm}
           />

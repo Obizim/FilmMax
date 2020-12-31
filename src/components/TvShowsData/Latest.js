@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {  fetchLatestTvShow } from "../redux/tvshows/actions/LatestAction";
+import { fetchLatestTvShow } from "../redux/tvshows/actions/LatestAction";
 import { url } from "../redux/tvshows/Tvtypes";
 import { Link } from "react-router-dom";
 
-function Latest({ tvList, loading, error,  fetchLatestTvShow }) {
+function Latest({ tvList, loading, error, fetchLatestTvShow }) {
   useEffect(() => {
     fetchLatestTvShow();
-  }, [ fetchLatestTvShow]);
+  }, [fetchLatestTvShow]);
 
   return loading ? (
     <h2>Loading...</h2>
@@ -28,12 +28,12 @@ function Latest({ tvList, loading, error,  fetchLatestTvShow }) {
               name = name.substring(0, maxChar) + " . . .";
             }
             return (
-              <div key={id} className="font-quicksand">
-                <img src={url + poster_path} alt={name} />
-                <p className="lg:text-xl text-base mt-2 rounded">
-                  <Link to={`/tvshow/${id}`}>{name}</Link>
-                </p>
-              </div>
+              <Link to={`/tvshow/${id}`}>
+                <div key={id} className="font-quicksand">
+                  <img src={url + poster_path} alt={name} />
+                  <p className="lg:text-xl text-base mt-2 rounded">{name}</p>
+                </div>
+              </Link>
             );
           })}
       </div>
@@ -51,7 +51,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchLatestTvShow: () => dispatch( fetchLatestTvShow()),
+    fetchLatestTvShow: () => dispatch(fetchLatestTvShow()),
   };
 };
 

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {  fetchAirTvShow } from "../redux/tvshows/actions/OnAirTvActions";
+import { fetchAirTvShow } from "../redux/tvshows/actions/OnAirTvActions";
 import { url } from "../redux/tvshows/Tvtypes";
 import { Link } from "react-router-dom";
 
-function OnAirTvShows({ tvList, loading, error,  fetchAirTvShow }) {
+function OnAirTvShows({ tvList, loading, error, fetchAirTvShow }) {
   useEffect(() => {
     fetchAirTvShow();
-  }, [ fetchAirTvShow]);
+  }, [fetchAirTvShow]);
 
   return loading ? (
     <h2>Loading...</h2>
@@ -28,12 +28,12 @@ function OnAirTvShows({ tvList, loading, error,  fetchAirTvShow }) {
               name = name.substring(0, maxChar) + " . . .";
             }
             return (
-              <div key={id} className="font-quicksand">
-                <img src={url + poster_path} alt={name} />
-                <p className="lg:text-xl text-basemt-2 rounded">
-                  <Link to={`/tvshow/${id}`}>{name}</Link>
-                </p>
-              </div>
+              <Link to={`/tvshow/${id}`}>
+                <div key={id} className="font-quicksand">
+                  <img src={url + poster_path} alt={name} />
+                  <p className="lg:text-xl text-base mt-2 rounded">{name}</p>
+                </div>
+              </Link>
             );
           })}
       </div>
@@ -51,7 +51,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAirTvShow: () => dispatch( fetchAirTvShow()),
+    fetchAirTvShow: () => dispatch(fetchAirTvShow()),
   };
 };
 

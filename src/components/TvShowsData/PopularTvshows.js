@@ -28,12 +28,12 @@ function PopularTvShows({ tvList, loading, error, fetchTvShow }) {
               name = name.substring(0, maxChar) + " . . .";
             }
             return (
-              <div key={id} className="font-quicksand">
-                <img src={url + poster_path} alt={name} />
-                <p className="lg:text-xl text-base mt-2 rounded">
-                  <Link to={`/tvshow/${id}`}>{name}</Link>
-                </p>
-              </div>
+              <Link to={`/tvshow/${id}`}>
+                <div key={id} className="font-quicksand">
+                  <img src={url + poster_path} alt={name} />
+                  <p className="lg:text-xl text-base mt-2 rounded">{name}</p>
+                </div>
+              </Link>
             );
           })}
       </div>

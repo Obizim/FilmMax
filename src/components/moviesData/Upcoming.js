@@ -28,12 +28,12 @@ function Upcoming({ movieList, loading, error, fetchUpcoming }) {
               title = title.substring(0, maxChar) + " . . .";
             }
             return (
-              <div key={id} className="font-quicksand">
-                <img src={url + poster_path} alt={title} />
-                <p className="lg:text-xl text-base mt-2 rounded">
-                  <Link to={`/${id}`}>{title}</Link>
-                </p>
-              </div>
+              <Link to={`/${id}`}>
+                <div key={id} className="font-quicksand">
+                  <img src={url + poster_path} alt={title} />
+                  <p className="lg:text-xl text-base mt-2 rounded">{title}</p>
+                </div>
+              </Link>
             );
           })}
       </div>

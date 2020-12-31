@@ -14,7 +14,7 @@ function Footer() {
             </a>
             <a href="https://github.com/Obizim" target="_blank" rel="noreferrer"><i className="fab fa-github" aria-hidden="true"></i>
             </a>
-            <a href="https://www.linkedin.com/in/zimuzo-obi-0984841b5/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin-in hover:text-blue-500"></i></a>
+            <a href="https://www.linkedin.com/in/obizim/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin-in hover:text-blue-500"></i></a>
             </div>
         </div>
     )
