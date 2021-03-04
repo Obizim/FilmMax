@@ -1,29 +1,29 @@
 import {
-  FETCH_PTVSHOWS_FAILURE,
-  FETCH_PTVSHOWS_REQUEST,
-  FETCH_PTVSHOWS_SUCCESS,
-} from "../Tvtypes";
+  FETCH_TVSHOWS_FAILURE,
+  FETCH_TVSHOWS_REQUEST,
+  FETCH_TVSHOWS_SUCCESS,
+} from "../Types";
 
 const initialState = {
   loading: false,
   tvshows: [],
-  error: ""
+  error: "",
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_PTVSHOWS_REQUEST:
+    case FETCH_TVSHOWS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_PTVSHOWS_SUCCESS:
+    case FETCH_TVSHOWS_SUCCESS:
       return {
         loading: false,
         tvshows: action.payload,
         error: "",
       };
-    case FETCH_PTVSHOWS_FAILURE:
+    case FETCH_TVSHOWS_FAILURE:
       return {
         loading: false,
         tvshows: [],

@@ -4,12 +4,12 @@ function Footer() {
     
 
     return (
-        <div className="border-t bg-gray-900 text-gray-100 flex items-center justify-between lg:p-12 py-6 px-4 font-quicksand">
-             <div><h1 className="text-xl text-red-600">FILMMAX
+        <div className="border-t border-black flex items-center justify-between lg:p-12 py-6 px-4 font-quicksand">
+             <div><h1 className="text-xl text-red-600">&copy; FilmMax
              </h1>
-             <p>&copy; all rights reserved</p>
+             <p>Reach out ➡</p>
              </div>
-            <div className="space-x-4 lg:text-2xl text-xl">
+            <div className="space-x-4 lg:text-xl text-normal">
             <a href="https://twitter.com/Obizim_" target="_blank" rel="noreferrer"><i className="fab fa-twitter transition hover:text-blue-400" aria-hidden="true"></i>
             </a>
             <a href="https://github.com/Obizim" target="_blank" rel="noreferrer"><i className="fab fa-github" aria-hidden="true"></i>

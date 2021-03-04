@@ -1,12 +1,12 @@
 import { Provider } from "react-redux";
-import Allmovies from "./components/AllMovies";
+import Allmovies from "./pages/AllMovies";
 import Navbar from "./components/NavBar";
-import store from "./components/redux/store";
+import store from "./redux/store";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Alltvshows from "./components/AllTvShows";
-import Moviedetail from "./components/moviesData/MovieDetail";
+import Alltvshows from "./pages/AllTvShows";
+import Moviedetail from "./pages/MovieDetail";
 import Footer from "./components/Footer";
-import Tvdetails from "./components/TvShowsData/TvDetails";
+import Tvdetails from "./pages/TvDetails";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           <Route exact path="/" component={Allmovies}></Route>
           <Route path="/tvshows" component={Alltvshows}></Route>
           <Route path="/tvshow/:id" component={Tvdetails}></Route>
-          <Route path="/:id" component={Moviedetail}></Route>      
+          <Route path="/:id" component={Moviedetail}></Route>
         </Switch>
         <Footer />
       </Router>
